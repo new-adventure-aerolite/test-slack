@@ -1,0 +1,24 @@
+name: Test
+on: push
+
+jobs:
+  test-send-to-slack:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    # Make directory to upload the test results
+    - name: Make Directory for results
+      run: mkdir -p testResults
+
+    - name: Generate file
+      run: |
+        echo hello > testResults/world.txt
+
+      # Upload the contents of Test Results directory to workspace
+    - name: Output the run Details
+      uses: actions/upload-artifact@v2
+      with: 
+       name: RunReports
+       path: testResults
