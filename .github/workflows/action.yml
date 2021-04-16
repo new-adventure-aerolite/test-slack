@@ -24,31 +24,9 @@ jobs:
        path: testResults
     
     - name: Slack Notification on SUCCESS
-      if: success()
-      uses: tokorom/action-slack-incoming-webhook@main
-      env:
-        INCOMING_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+      uses: zhangcz828/github-action-slack-notify-build-new@v2
       with:
-        text: Successfully automated deployment.
-        attachments: |
-          [
-            {
-              "color": "good",
-              "author_name": "${{ github.actor }}",
-              "author_icon": "${{ github.event.sender.avatar_url }}",
-              "fields": [
-                {
-                  "title": "Commit Message",
-                  "value": "${{ env.COMMIT_MESSAGE }}"
-                },
-                {
-                  "title": "GitHub Actions URL",
-                  "value": "${{ github.event.repository.url }}/actions/runs/${{ github.run_id }}"
-                },
-                {
-                  "title": "Compare URL",
-                  "value": "${{ github.event.compare }}"
-                }
-              ]
-            }
-          ]
+        status: STARTED
+        color: good
+      env:
+        SLACK_BOT_TOKEN: ${{ secrets.SLACK_WEBHOOK_URL }}
