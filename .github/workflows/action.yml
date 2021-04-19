@@ -23,8 +23,8 @@ jobs:
        name: RunReports
        path: testResults
     
-    - name: Slack Notification on SUCCESS
-      uses: zhangcz828/github-action-slack-notify@v1.0.2
+    - name: github-action-slack-notify
+      uses: zhangcz828/github-action-slack-notify@v1.1.0
       with:
         status: STARTED
         color: good
