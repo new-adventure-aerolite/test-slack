@@ -30,7 +30,7 @@ jobs:
       if: success()
       env:
         SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
-      uses: zhangcz828/github-action-slack-notify@v1.3.1
+      uses: zhangcz828/github-action-slack-notify@v1.3.2
       with:
         status: SUCCESS
         color: good
@@ -39,7 +39,7 @@ jobs:
       if: failure()
       env:
         SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
-      uses: zhangcz828/github-action-slack-notify@v1.3.1
+      uses: zhangcz828/github-action-slack-notify@v1.3.2
       with:
         status: FAILED
         color: danger
