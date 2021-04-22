@@ -1,5 +1,5 @@
 name: Test
-on: push
+on: [push,pull_request]
 
 jobs:
   test-send-to-slack:
@@ -23,10 +23,21 @@ jobs:
        name: RunReports
        path: testResults
     
-    - name: github-action-slack-notify
-      uses: zhangcz828/github-action-slack-notify@v1.1.0
-      with:
-        status: STARTED
-        color: good
+    - name: Notify slack success
+      if: success()
       env:
         SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+      uses: zhangcz828/github-action-slack-notify@v1.2.0
+      with:
+        status: SUCCESS
+        color: good
+
+    - name: Notify slack fail
+      if: failure()
+      env:
+        SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+      uses: zhangcz828/github-action-slack-notify@v1.2.0
+      with:
+        status: FAILED
+        color: danger
+  
