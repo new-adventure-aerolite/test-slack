@@ -1,0 +1,23 @@
+name: Cut Rlease
+on:
+  repository_dispatch:
+    types: [cut-release]
+
+jobs:
+  cut-release:
+    name: Create Release
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      # - name: Generate new_jira_tickets.txt
+      #   run: |
+      #     generate_jira_ticket.sh
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
+        with:
+          tag_name: ${{ github.event.client_payload.release_version }}
+          release_name: Release ${{ github.event.client_payload.release_version }}
