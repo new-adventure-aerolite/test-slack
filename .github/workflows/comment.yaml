@@ -1,8 +1,8 @@
 name: "Comment check"
 
 on:
-  issue_comment:
-    types: [created, edited]
+  issues:
+    types: [opened, edited]
 jobs:
   parse_issue:
     runs-on: ubuntu-latest
